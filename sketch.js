@@ -28,6 +28,8 @@ function setup() {
 
 function draw() {
   background("white");
+  camera.position.x=200;
+  camera.position.y=monkey.y-100;
   if (gameState === PLAY) {
     if (keyDown("space") && monkey.y > 180) {
       monkey.velocityY = -12;
@@ -52,7 +54,19 @@ function draw() {
   if (monkey.isTouching(obstacleGroup)) {
     gameState = END;
   }
-
+if(score>50){
+  obstacleGroup.setLifetimeEach(0);
+    fruitGroup.setLifetimeEach(0);
+    obstacleGroup.setVelocityEach(0);
+    fruitGroup.setVelocityEach(0);
+    monkey.x = 200;
+    monkey.y = 200;
+    textSize(30);
+    fill("red");
+    text("You Win", 130, 180);
+    score = 0
+    survivalTime = 0;
+}
   if (gameState === END) {
     obstacleGroup.setLifetimeEach(0);
     fruitGroup.setLifetimeEach(0);
